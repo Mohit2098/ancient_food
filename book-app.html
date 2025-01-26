@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Booking</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Gotham:wght@300;400&display=swap");
+  
+      .client-info-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.client-info-section h4 {
+    color: #5A3629; /* Dark brown */
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.client-info-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.client-info-form input {
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #5A3629;
+}
+
+.client-info-form input::placeholder {
+    color: #CC583F; 
+}
+
+@media (max-width: 768px) {
+    .client-info-section {
+        padding: 15px;
+    }
+
+    .client-info-form input {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .client-info-section h4 {
+        font-size: 16px;
+    }
+
+    .client-info-form input {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+      body {
+        font-family: "Gotham", sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .booking-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        max-width: 1000px;
+        margin: auto;
+      }
+      .booking-box {
+        background: white;
+
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        border: 1px solid #eaeaea;
+        overflow: hidden;
+      }
+      .appointment-details {
+        margin: 0 auto;
+        padding: 30px;
+     
+      }
+
+      .appointment-details h3 {
+        font-family: 'Gotham';
+        font-size: 24px;
+        margin-top: 2rem;
+        color: #451813;
+
+      }
+
+     
+      .rn-appn-desc .info-desc, .price-ss-cl {
+
+        font-size: 20px;
+        font-family: 'Gotham';
+        color: #451813;
+        margin-top: 15px;
+        line-height: 1.6;
+        font-weight: 400;
+      }
+
+      .consul-info p{
+        font-size: 15px;
+        font-family: 'Gotham';
+        color: #451813;
+        margin-top: 15px;
+        line-height: 1.6;
+        font-weight: 800;
+        margin-bottom: 0;
+
+
+      }
+
+
+      .consul-info .about-consl{
+        font-size: 15px;
+        font-family: 'Gotham';
+        color: #451813;
+        margin-top: 15px;
+        line-height: 1.6;
+        font-weight: 400;
+        padding-left: 2rem;
+
+      }
+      .appointment-details .icon {
+        color: #d9534f;
+        font-size: 16px;
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+      .rn-app-buttons {
+        margin-top: 4rem;
+      }
+
+
+
+      .rn-app-buttons .cancel {
+        background: transparent;
+        color: #451813;
+        border: 1px solid #451813;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+        font-family: 'Gotham';
+        font-weight: 500;
+      }
+      
+      .rn-app-buttons .confirm-btn {
+        background: #451813;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+     
+      .r-ap-cn-dt {
+        display: flex;
+        justify-content: space-between;
+      }
+
+
+
+.go-back {
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.go-back a {
+    text-decoration: none;
+    color: #451813;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.go-back a:hover {
+    text-decoration: underline;
+}
+
+.page-heading {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+    color: #451813;
+    justify-content: center;
+    display: flex;
+    padding: 2rem;
+    text-align: center;
+}
+
+.price-of-ss{
+  color: #CB4D37;
+    font-weight: 500;
+}
+
+
+.client-info-head{
+
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  color: #451813;
+  font-size: 25px;
+  font-family: 'Gotham';
+}
+
+
+.rn-app-btn-dt{
+  max-width: 1000px;
+}
+
+.rn-app-btn-rw-cl{
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  }
+
+ .cons-dt-cl{
+  display: flex;
+  width: 180px;
+
+ }
+
+ .icon-usr img{
+  height: 25px;
+ }
+
+ .icon img{
+
+ height: 20px;
+ }
+
+    </style>
+  </head>
+  <body>
+
+ 
+        <div class="container">
+            <div class="go-back">
+                <a href="javascript:history.back()">← GO BACK</a>
+            </div>
+            <h1 class="page-heading">Complete information <br>
+              and confirm your appointment</h1>
+        </div>
+  
+    <div class="booking-container">
+      <div class="booking-box">
+        <div class="appointment-details">
+          <div class="appn-details">
+
+            <div class="row">
+              <div class="col-md-6">
+                <img src="l2.png" alt="Ancient Future Logo" />
+                <h3>Appointment with Sarah Marine</h3>
+    
+                <div class="rn-appn-desc">
+                  <p class="info-desc">
+                    Get ready for a meeting full of information related to ancient
+                    food practices to help you through your daily food habits and
+                    rituals.
+                  </p>
+
+                  <p class="price-ss-cl">
+                    Price of session: <span class="price-of-ss">60 euros</span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-6 ">
+                <div class="consul-info">
+
+                  
+                  <p>
+                    <span class="icon-usr">
+                      <img src="user-icon.png" alt="" />
+                    </span>
+                    Sarah Marine
+                  </p>
+                  <span class="about-consl">
+                    Certified in ancient practices
+                  </span>
+  
+                  <p>
+                    <span class="icon"><img src="time-icon.png" alt="" /></span>
+                    April 25th 2024 at 15h30
+                  </p>
+  
+                  <div class="cons-dt-cl">
+                    <p>
+                      <span class="icon"><img src="location-icon.png" alt="" /></span>
+                    
+                    </p>
+                    <p>
+                      At the office of Sarah
+                      123 street name 
+                      12345 City
+                    </p>
+                  </div>
+                 
+
+                </div>
+            
+
+                
+
+
+
+              </div>
+            </div>
+         
+
+
+
+        
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="client-info-head">Client’s information:</h4>
+              <form class="client-info-form">
+                  <input type="text" placeholder="First name">
+                  <input type="text" placeholder="Last name">
+                  <input type="email" placeholder="Email">
+                  <input type="tel" placeholder="Phone number">
+                  <input type="text" placeholder="Postal address">
+              </form>
+            </div>
+          </div>
+       
+          
+       
+
+        
+        </div>
+    
+      
+      </div>
+
+     
+    
+    </div>
+
+
+
+    <div class="container rn-app-btn-dt">
+      <div class="rn-app-buttons">
+        <div class="row rn-app-btn-rw-cl">
+          <div class="col-md-4 rn-app-cn-btn">
+            <button class="cancel">CANCEL AND CLOSE</button>
+          </div>
+          <div class="col-md-4 justify-content-end d-flex">
+            <button class="confirm-btn">CONFIRM AND PAY</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ 
+  </body>
+</html>

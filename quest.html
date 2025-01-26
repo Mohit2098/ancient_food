@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutritional Match Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Gotham:wght@300;400&display=swap");
+
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Gotham:wght@300;400&display=swap");
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+
+        
+.go-back {
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.go-back a {
+    text-decoration: none;
+    color: #451813;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.go-back a:hover {
+    text-decoration: underline;
+}
+
+.page-heading {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+    color: #451813;
+    justify-content: center;
+    display: flex;
+    padding: 2rem;
+    text-align: center;
+}
+
+
+.quiz-cont-heading-cl{
+    font-size: 34px;
+    font-weight: 400;
+    margin: 0;
+    color: #4f1c14;
+    justify-content: center;
+    display: flex;
+    padding: 2rem;
+    font-family: 'Playfair Display', serif;
+
+}
+
+.question-mn-cont-cl{
+    max-width: 1000px !important;
+}
+
+
+.form-check-label{
+    color: #4f1c14;
+    font-size: 20px;
+    font-family: 'Gotham', sans-serif;
+}
+
+.form-check-input[type=radio] {
+    border-color: #4f1c14;
+}
+
+
+
+
+     .quiz-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        }
+        .question-header {
+        color: #4f1c14;
+        font-size: 24px;
+        font-weight: 700;
+        font-family: 'Gotham', sans-serif;
+        }
+        .custom-radio {
+            margin-top: 20px;
+
+            margin-bottom: 15px;
+        }
+        .other-textarea {
+            display: none;
+            margin-top: 15px;
+        }
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+
+        .form-check-input[type=radio] {
+    border: 2px solid #4f1c14; /* Default border color */
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.form-check-input[type=radio]:checked {
+    background-color:  transparent;
+    border-color: #c74b3b; /* Red border */
+}
+
+.form-check-input[type=radio]:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 17px;
+    height: 17px;
+    background-color: #c74b3b;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.form-check-label {
+    color: #4f1c14;
+    font-size: 20px;
+    font-family: 'Gotham', sans-serif;
+}
+
+
+.form-control.other-textarea{
+    border: 1px solid #c74b3b;
+    border-radius: 0;
+    resize: none;
+    height: 100px;
+}
+
+.form-control.other-textarea::placeholder {
+    color: #4f1c14;
+    font-size: 20px;
+    font-family: 'Gotham', sans-serif;
+    
+}
+.quiz-nxt-btn{
+    justify-content: end;
+    display: flex;
+}
+
+#next-question{
+    background: #451813;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background .3s ease;
+    font-weight: 500;
+    font-family: 'Gotham';
+}
+
+.quiz-cncl-btn{
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background .3s ease;
+    font-weight: 500;
+    font-family: 'Gotham';
+    background: transparent;
+    border: 1px solid #451813;
+    color: #451813;
+
+
+}
+
+.quiz-fin-btn{
+    background: #451813;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background .3s ease;
+    font-weight: 500;
+    font-family: 'Gotham';
+}
+
+.quiz-nxt-btn-ls{
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.quiz-fin-btn:hover{
+    background: #451813;
+
+}
+
+
+
+
+
+ .loading-result-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        }
+
+        .loading-res-head{
+            font-size: 34px;
+            font-weight: 400;
+            margin: 0;
+            color: #4f1c14;
+            justify-content: center;
+            display: flex;
+            padding: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+
+        .loading-res-head-cncl-btn{
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background .3s ease;
+            font-weight: 500;
+            font-family: 'Gotham';
+            background: transparent;
+            border: 1px solid #451813;
+            color: #451813;
+
+        }
+
+        .loading-res-head-cncl-btn:hover{
+
+            background: transparent;
+            color: #451813;
+           
+
+        }
+
+        .matched-result-cont{
+            max-width: 1000px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+
+        }
+
+        .matched-result-head{
+            font-size: 34px;
+            font-weight: 400;
+            margin: 0;
+            color: #4f1c14;
+            justify-content: center;
+            display: flex;
+            padding: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .mt-rs-nt-dts{
+
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .mt-rs-nt-nm{
+            color: #5c2a24;
+            font-size: 18px;
+            font-weight: 800;
+            font-family: 'Gotham', sans-serif;
+            display: flex;
+            align-items: center;
+        }
+
+
+
+.mt-rs-nt-certified {
+    font-size: 15px;
+    color: #C74C36;
+    font-family: 'Gotham', sans-serif;
+    font-weight: 600;
+    padding-left: 1rem;
+    margin: 0;
+}
+
+
+        .mt-rs-nt-ab-dt{
+
+            font-size: 20px;
+            color: #451813;
+            margin-top: 15px;
+            line-height: 1.6;
+            font-weight: 100;
+            font-family: 'Gotham';
+
+        }
+
+
+
+        .mn-rs-bk-app-btn-cl{
+            margin-top: 3rem;
+            justify-content: center;
+            display: flex;
+        }
+
+        .mn-rs-bk-app-btn-cl #book-appointment{
+        background: #451813;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background .3s ease;
+        font-weight: 500;
+        font-family: 'Gotham';
+        text-transform: uppercase;
+
+        }
+
+        .match-card{
+            width: 900px;
+            padding: 1rem;
+        }
+
+        .match-nt-img img{
+           height: 180px;
+
+        }
+
+        .loader{
+          justify-content: center;
+          display: flex;
+          height: 400px;
+        }
+        .cpbl_btn {
+    display: inline-block;
+    position: relative;
+}
+
+.read-more {
+    color: #fff; /* Adjust color as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    text-decoration: none;
+    padding-right: 20px; /* Space for the line */
+    display: inline-block;
+    position: relative;
+}
+
+.read-more::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #666; /* Line color */
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -0.5px;
+}
+
+.read-more:hover {
+    color: #ccc; /* Optional hover effect */
+}
+
+.read-more:hover::after {
+    background-color: #ccc; /* Optional hover effect */
+}
+
+
+    </style>
+</head>
+<body>
+
+
+    <div class="cpbl_btn">
+        <a href="#" class="read-more">Read More</a>
+    </div>
+    
+
+
+<section>
+
+
+    <form id="quiz-form">
+
+    <div class="container question-mn-cont-cl">
+        <div class="go-back">
+            <a href="javascript:history.back()" id="go-back">← GO BACK</a>
+        </div>
+        <h1 class="page-heading">Complete information <br>
+          and confirm your appointment</h1>
+    </div>
+
+    <div class="container quiz-container">
+
+  
+            <!-- Question 1 -->
+            <div class="question active" id="question-1">
+                <h2 class="text-center my-4 quiz-cont-heading-cl">Find your perfect nutritional match</h2>
+                <div class="question-header">Question 1: What is your primary health goal?</div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-1" id="goal1-q1" value="Improve digestion">
+                    <label class="form-check-label" for="goal1-q1">Improve digestion</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-1" id="goal2-q1" value="Boost energy levels">
+                    <label class="form-check-label" for="goal2-q1">Boost energy levels</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-1" id="goal3-q1" value="Reduce inflammation">
+                    <label class="form-check-label" for="goal3-q1">Reduce inflammation</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-1" id="goal4-q1" value="General wellness">
+                    <label class="form-check-label" for="goal4-q1">General wellness</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-1" id="goal5-q1" value="Other">
+                    <label class="form-check-label" for="goal5-q1">Other</label>
+                </div>
+                <textarea class="form-control other-textarea" id="other-specify-q1" placeholder="Please specify..." rows="3"></textarea>
+               
+            </div>
+        
+            <!-- Question 2 -->
+            <div class="question" id="question-2">
+                <h2 class="text-center my-4 quiz-cont-heading-cl">Find your perfect match</h2>
+                <div class="question-header">Question 2: Do you have any dietary restrictions or preferences?</div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-2" id="goal1-q2" value="Vegetarian">
+                    <label class="form-check-label" for="goal1-q2">Vegetarian</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-2" id="goal2-q2" value="Vegan">
+                    <label class="form-check-label" for="goal2-q2">Vegan</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-2" id="goal3-q2" value="Gluten Free">
+                    <label class="form-check-label" for="goal3-q2">Gluten Free</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-2" id="goal4-q2" value="Dairy Free">
+                    <label class="form-check-label" for="goal4-q2">Dairy Free</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-2" id="goal5-q2" value="Other">
+                    <label class="form-check-label" for="goal5-q2">Other</label>
+                </div>
+                <textarea class="form-control other-textarea" id="other-specify-q2" placeholder="Please specify..." rows="3"></textarea>
+               
+            </div>
+        
+            <!-- Question 3 -->
+            <div class="question" id="question-3">
+                <h2 class="text-center my-4 quiz-cont-heading-cl">Find your perfect match</h2>
+                <div class="question-header">Question 3: Are you interested in any specific ancient food practices or rituals?</div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-3" id="goal1-q3" value="Ayurveda">
+                    <label class="form-check-label" for="goal1-q3">Ayurveda</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-3" id="goal2-q3" value="Traditional Chinese Medicine">
+                    <label class="form-check-label" for="goal2-q3">Traditional Chinese Medicine</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-3" id="goal3-q3" value="Mediterranean Diet">
+                    <label class="form-check-label" for="goal3-q3">Mediterranean Diet</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-3" id="goal4-q3" value="Fermented Diet">
+                    <label class="form-check-label" for="goal4-q3">Fermented Diet</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-3" id="goal5-q3" value="No Preference">
+                    <label class="form-check-label" for="goal5-q3">No Preference</label>
+                </div>
+                <textarea class="form-control other-textarea" id="other-specify-q3" placeholder="Please specify..." rows="3"></textarea>
+              
+            </div>
+        
+            <!-- Question 4 -->
+            <div class="question" id="question-4">
+                <h2 class="text-center my-4 quiz-cont-heading-cl">Find your perfect match</h2>
+                <div class="question-header">Question 4: How would you describe your current eating habits?</div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-4" id="goal1-q4" value="Very Healthy and Balanced">
+                    <label class="form-check-label" for="goal1-q4">Very Healthy and Balanced</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-4" id="goal2-q4" value="Moderately Healthy">
+                    <label class="form-check-label" for="goal2-q4">Moderately Healthy</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-4" id="goal3-q4" value="Need Improvement">
+                    <label class="form-check-label" for="goal3-q4">Need Improvement</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-4" id="goal4-q4" value="Unhealthy">
+                    <label class="form-check-label" for="goal4-q4">Unhealthy</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-4" id="goal5-q4" value="Other">
+                    <label class="form-check-label" for="goal5-q4">Other</label>
+                </div>
+                <textarea class="form-control other-textarea" id="other-specify-q4" placeholder="Please specify..." rows="3"></textarea>
+               
+            </div>
+         
+            <!-- Question 5 -->
+            <div class="question" id="question-5">
+                <h2 class="text-center my-4 quiz-cont-heading-cl">Find your perfect match</h2>
+                <div class="question-header">Question 5: What type of consultation format do you prefer?</div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-5" id="goal1-q5" value="In-person">
+                    <label class="form-check-label" for="goal1-q5">In-person</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-5" id="goal2-q5" value="Virtual">
+                    <label class="form-check-label" for="goal2-q5">Virtual</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-5" id="goal3-q5" value="Phone">
+                    <label class="form-check-label" for="goal3-q5">Phone</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-5" id="goal4-q5" value="Email">
+                    <label class="form-check-label" for="goal4-q5">Email</label>
+                </div>
+                <div class="form-check custom-radio">
+                    <input class="form-check-input" type="radio" name="health-goal-5" id="goal5-q5" value="No Preference">
+                    <label class="form-check-label" for="goal5-q5">No preference</label>
+                </div>
+                <textarea class="form-control other-textarea" id="other-specify-q5" placeholder="Please specify..." rows="3"></textarea>
+               
+            </div>
+            <div class="quiz-nxt-btn">
+                <button type="button" id="next-question" class="btn btn-dark mt-4">Next Question</button>
+            </div>
+        
+    
+            <div class="quiz-nxt-btn-ls">
+                <!-- Cancel and Finish buttons on the last question -->
+                <button type="button" id="cancel" class="btn btn-light mt-4 quiz-cncl-btn">Cancel</button>
+                <button type="submit" id="finish" class="btn btn-dark mt-4 quiz-fin-btn">FINISH AND GET MATCHED</button>
+            </div>
+    
+    
+    
+      
+    
+       
+        </div>
+    </form>
+</section>
+
+<section id="loader-section"  style="display:none;">
+
+    <div class="container question-mn-cont-cl">
+        <div class="go-back">
+            <a href="" id="go-back">← GO BACK</a>
+        </div>
+      
+    </div>
+
+    <div class="container loading-result-container">
+        <h2 class="text-center my-4 loading-res-head">Looking for your perfect match</h2>
+        <div class="loader"><img src="loader.svg" alt=""></div>
+        <button type="button" id="cancel" class="btn btn-outline-dark mt-4 loading-res-head-cncl-btn">Cancel</button>
+
+    </div>
+
+       
+
+
+</section>
+
+
+
+<section id="match-result" style="display: none;">
+    <div class="container question-mn-cont-cl">
+        <div class="go-back">
+            <a href="" id="go-back">← GO BACK</a>
+        </div>
+      
+    </div>
+
+    <div class="container matched-result-cont">
+        <h2 class="text-center my-4 matched-result-head">You have been matched with...</h2>
+        <div class="match-card">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 match-nt-img">
+                        <img src="img-1.png" alt="Matched person">
+                    </div>
+                    <div class="col-md-9 mt-rs-nt-dts">
+                        <h3 class="mt-rs-nt-nm" >Sarah Marine <p class="mt-rs-nt-certified">★ Certified in ancient practices</p></h3>
+                        <p class="mt-rs-nt-ab-dt">Sarah Marine combines expertise in Ayurveda and Traditional Chinese Medicine to tailor personalized nutrition plans. With over 15 years of experience, she is dedicated to restoring balance and vitality through ancient food wisdom.</p>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mn-rs-bk-app-btn-cl">
+            <button type="button" id="book-appointment" class="btn btn-dark">Book an appointment with Sarah</button>
+        </div>
+       
+        </div>
+
+    </div>
+   
+        
+</section>
+       
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const nextButton = document.getElementById('next-question');
+    const cancelButton = document.getElementById('cancel');
+    const finishButton = document.getElementById('finish');
+
+    // Initial state
+    cancelButton.style.display = 'none';
+    finishButton.style.display = 'none';
+
+    // Toggle visibility of "Other" textareas
+    document.querySelectorAll('.form-check-input').forEach(input => {
+        input.addEventListener('change', function() {
+            const textarea = this.closest('.question').querySelector('.other-textarea');
+            textarea.style.display = this.value === 'Other' ? 'block' : 'none';
+        });
+    });
+
+    // Hide all "Other" textareas initially
+    document.querySelectorAll('.other-textarea').forEach(textarea => textarea.style.display = 'none');
+
+    // Handle "Next Question" button
+    nextButton.addEventListener('click', function() {
+        const current = document.querySelector('.question.active');
+        const next = current.nextElementSibling;
+
+        if (next && next.classList.contains('question')) {
+            current.classList.remove('active');
+            next.classList.add('active');
+
+            // Show/Hide buttons based on the current question
+            if (next.id === 'question-5') {
+                nextButton.style.display = 'none';
+                cancelButton.style.display = 'inline-block';
+                finishButton.style.display = 'inline-block';
+            }
+        }
+    });
+
+    // Handle "Go Back" link for quiz questions
+    document.getElementById('go-back').addEventListener('click', function(e) {
+        e.preventDefault();
+        const current = document.querySelector('.question.active');
+        const prev = current.previousElementSibling;
+
+        if (prev && prev.classList.contains('question')) {
+            current.classList.remove('active');
+            prev.classList.add('active');
+
+            // Reset button visibility if not on the last question
+            if (current.id === 'question-5') {
+                nextButton.style.display = 'inline-block';
+                cancelButton.style.display = 'none';
+                finishButton.style.display = 'none';
+            }
+        } 
+    });
+
+    // Handle "Cancel" button click
+    cancelButton.addEventListener('click', function() {
+        if (document.getElementById('loader-section').style.display === 'block') {
+            window.location.href = 'your-homepage-url-here'; // Redirect to home page when canceling from loader
+        } else {
+            window.location.href = 'your-cancel-url-here'; // Replace with your cancel URL or logic
+        }
+    });
+
+    // Handle form submission
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+    });
+
+    document.getElementById("finish").addEventListener("click", function() {
+        // Hide the current quiz section
+        document.getElementById("quiz-form").style.display = "none";
+        
+        // Show the loader section
+        document.getElementById("loader-section").style.display = "block";
+        
+       // Simulate a delay before showing the match result (e.g., 3 seconds)
+        setTimeout(function() {
+            // Hide the loader
+            document.getElementById("loader-section").style.display = "none";
+            
+            // Show the match result
+            document.getElementById("match-result").style.display = "block";
+        }, 3000); // Adjust time as needed
+    });
+
+});
+  </script>
+</body>
+</html>
+
+
+
+
